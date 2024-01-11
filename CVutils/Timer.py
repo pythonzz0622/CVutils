@@ -44,7 +44,12 @@ class FrameTimer:
         times = self._get_avg()
         cv2.putText(frame, f"Avg msec : {times['msec']:.2f}msec", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2) 
         cv2.putText(frame, f"Avg FPS : {times['fps']:.2f} FPS", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-        
+    
+    def print_frame_rate(self):
+        self._step()
+        times = self._get_avg()
+        print( f"Avg msec : {times['msec']:.2f}msec", end = '\r')
+
     def frame_rate_control(self):
         elapsed_time = time.time() - self.start_time
         if elapsed_time < self.rate:  # 40 msec 미만이면 나머지 시간만큼 대기
